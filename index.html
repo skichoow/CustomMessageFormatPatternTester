@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Message Format Validator Tool</title>
+    <!-- JavaScript Bundle with Popper -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script>
+    function myFunction(inputValue, pattern) {
+        var xmlHttp = new XMLHttpRequest();
+        var i;
+        var text = "";
+        if(pattern != ""){
+            xmlHttp.open( "GET", "http://localhost:8080/formatter/format/"+inputValue+"/"+encodeURIComponent(pattern), false ); // false for synchronous request
+            xmlHttp.send( null );
+        }else{
+            xmlHttp.open( "GET", "http://localhost:8080/formatter/format/"+inputValue, false ); // false for synchronous request
+            xmlHttp.send( null );
+        }
+        document.getElementById("result").innerHTML = xmlHttp.responseText ;
+    }
+    </script>
+</head>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+<body>
+<h2 class="text-md-center">Custom Message Format Validator Tool</h2>
+<div class="container">
+    Value (range 0-n) <input type="text" name="inputValue" id="inputValue"/><br>
+    Custom Pattern <input type="text" name="pattern" id="pattern"/><br>
+    <button class="btn btn-success" onclick="myFunction(document.getElementById('inputValue').value, document.getElementById('pattern').value)">REFRESH</button>
+    <br>
+    <i>
+    Default pattern
+    <p class="text-sm-left">{0,choice,1#minuta|1<{0, number} minuty|4<{0, number} minut} temu</p>
+    </i>
+    <p id="result">result</p>
+</div>
+</body>
+</html>

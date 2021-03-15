@@ -1,0 +1,4 @@
+com\icuformatter\pl\FormatterService.class
+com\icuformatter\pl\ICUFormatterApplication.class
+com\icuformatter\pl\FormatterController.class
+com\icuformatter\pl\MessageSourceConfiguration.class
